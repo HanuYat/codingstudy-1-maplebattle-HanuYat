@@ -1,0 +1,14 @@
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\bin\Debug\net10.0\MapleBattle.exe
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\bin\Debug\net10.0\MapleBattle.deps.json
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\bin\Debug\net10.0\MapleBattle.runtimeconfig.json
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\bin\Debug\net10.0\MapleBattle.dll
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\bin\Debug\net10.0\MapleBattle.pdb
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.AssemblyInfoInputs.cache
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.AssemblyInfo.cs
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.csproj.CoreCompileInputs.cache
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.dll
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\refint\MapleBattle.dll
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.pdb
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\MapleBattle.genruntimeconfig.cache
+C:\Users\hamme\source\repos\MapleBattle\MapleBattle\obj\Debug\net10.0\ref\MapleBattle.dll
