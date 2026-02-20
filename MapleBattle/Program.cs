@@ -13,6 +13,8 @@ const int criticalProbality = 30; // 크리티컬 확률 (크리티컬이면 공
 bool isStunned = false; // 기절 상태 플래그
 bool isDefencing = false;   // 방어 상태 플래그
 
+int playerActionNumber = 0;   // 플레이어 행동선택
+
 // === 검은 마법사 스탯 ===
 float enemyHP = 5000;   // 검마 HP
 
@@ -49,22 +51,65 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
 
             else    // 1-2. 다음 저주 발동까지 쿨타임이 남은 경우 : 위의 효과는 발생하지 않고, 쿨타임 카운트가 1 감소합니다.
             {
+                playerHP -= 50;    // 윤지수 작성 : '저주 패턴 발동 시 매 턴 플레이어 HP 50 감소' 규칙이 있었습니다.
                 curseCount--;
             }
 
             Console.WriteLine($"  - 다음 저주까지 {curseCount} 라운드 \n");
+            if (isStunned)    // 윤지수 작성 : '저주 패턴으로 스턴 상태일 때 해당 턴 건너뜀' 조건이 있었습니다.
+            {
+                continue;
+            }
         }
     }
 
     // 윤지수님 파트 ▼    // 쓰다보니 양이 너무 많아서 윗부분을 뺐어요!
     {
         // 1. 플레이어의 행동
-            // 1-1. 플레이어가 기절 상태라면, 아무것도 하지 않고 넘어갑니다. 기절 상태를 해제시킵니다.
-            // 1-2. 플레이어가 기절하지 않았다면, (1.공격/2.스킬/3.방어) 중 유효한 입력이 들어올 때까지 반복하여 입력을 받습니다.
-                // 1-1-1. 공격
-                // 1-1-2. 스킬 (*MP가 100 미만이라면 사용할 수 없습니다.)
-                // 1-1-3. 방어
-                // 각각 올바른 작업을 하도록 작성해 주세요.
+        // 1-1. 플레이어가 기절 상태라면, 아무것도 하지 않고 넘어갑니다. 기절 상태를 해제시킵니다.
+        // 1-2. 플레이어가 기절하지 않았다면, (1.공격/2.스킬/3.방어) 중 유효한 입력이 들어올 때까지 반복하여 입력을 받습니다.
+            Console.WriteLine("  - 플레이어 행동 선택 (1~3 숫자 입력)");
+            Console.Write("  [ 1. 일반 공격    2. 스킬 사용    3. 방어 ] : ");
+        string input = Console.ReadLine();
+        while (!int.TryParse(input, out playerActionNumber) || playerActionNumber < 1 || playerActionNumber > 3)
+        {
+            if (true)
+            {
+                
+            }
+            if (!int.TryParse(input, out playerActionNumber) || playerActionNumber < 1 || playerActionNumber > 3)
+            {
+                
+            }
+            Console.WriteLine("  - 1~3 사이의 숫자만 입력 가능\n");
+            Console.Write("  - 다시 입력 : ");
+        }
+
+        
+        switch (playerActionNumber)
+        {
+            // 1-1-1. 일반 공격, 검은마법 체력 감소 후 잔여 체력 출력했습니다.
+            case 1:
+                enemyHP = enemyHP + enemyDefense - playerAttackDamage;  
+                Console.WriteLine($"  - {playerActionNumber}. 일반 공격 선택\n");
+                Console.WriteLine($"  - 검은 마법사 HP -{enemyDefense-playerAttackDamage}\n");
+                Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
+                break;
+            // 1-1-2. 스킬 (*MP가 100 미만이라면 사용할 수 없습니다.)
+            case 2:
+                enemyHP = enemyHP + enemyDefense - playerSkillDamage;
+                Console.WriteLine($"  - {playerActionNumber}. 스킬 사용 선택\n");
+                Console.WriteLine($"  - 검은 마법사 HP -{enemyDefense - playerSkillDamage}\n");
+                Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
+                playerMP -= 100;
+                break ;
+            // 1-1-3. 방어
+            case 3:
+                isDefencing = true;
+                Console.WriteLine($"  - {playerActionNumber}. 방어 선택\n");
+                break;
+        }
+        // 각각 올바른 작업을 하도록 작성해 주세요.
     }
     // 윤지수님 파트 ▲
 
