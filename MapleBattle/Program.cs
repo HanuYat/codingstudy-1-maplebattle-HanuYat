@@ -155,58 +155,30 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
         // 4. 만약 플레이어의 체력이 0 이하가 되었다면 플레이어가 패배했음을 알리고, 반복문을 빠져나갑니다.
     }
     // 이현석님 파트 ▲
-    if (isDefencing)
+    int nextBlackMageDamage = 0;
+
+    if (enemyHP <= 1000)
     {
-        if (enemyHP <= 1000)
-        {
-            playerHP -= enemyAttack * 2 - playerDefense;
-
-            Console.WriteLine("  - 검마의 HP가 1000 이하입니다! 특수 패턴 발동! \n");
-            Console.WriteLine("  - 검마의 공격력이 2배로 증가합니다! \n");
-            Console.WriteLine("  - 플레이어는 방어 중입니다! 방어력으로 데미지를 경감합니다! \n");
-            Console.WriteLine($"  - 플레이어 HP -{enemyAttack * 2 - playerDefense} \n");
-            Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
-        }
-        else
-        {
-            playerHP -= enemyAttack - playerDefense;
-
-            Console.WriteLine("  - 검마의 공격! \n");
-            Console.WriteLine("  - 플레이어는 방어 중입니다! 방어력으로 데미지를 경감합니다! \n");
-            Console.WriteLine($"  - 플레이어 HP -{enemyAttack - playerDefense} \n");
-            Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
-        }
-
-        if (playerHP <= 0)
-        {
-            Console.WriteLine($"  ### 플레이어 패배... ###\n");
-            break;
-        }
+        Console.WriteLine("  - 검마 HP 1000 이하! 데미지가 2배가 됩니다!\n");
+        nextBlackMageDamage = enemyAttack * 2;
     }
     else
     {
-        if (enemyHP <= 1000)
-        {
-            playerHP -= enemyAttack * 2;
+        nextBlackMageDamage = enemyAttack;
+    }
 
-            Console.WriteLine("  - 검마의 HP가 1000 이하입니다! 특수 패턴 발동! \n");  
-            Console.WriteLine("  - 검마의 공격력이 2배로 증가합니다! \n");
-            Console.WriteLine($"  - 플레이어 HP -{enemyAttack * 2} \n");
-            Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
-        }
-        else
-        {
-            playerHP -= enemyAttack;
+    if (isDefencing)
+    {
+        nextBlackMageDamage = enemyAttack / 2;
+        Console.WriteLine($"  - 방어 중! 검은마법사의 데미지가 2배 감소!\n");
+    }
 
-            Console.WriteLine("  - 검마의 공격! \n");
-            Console.WriteLine($"  - 플레이어 HP -{enemyAttack} \n");
-            Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
-        }
+    Console.WriteLine($"  - 플레이어 HP -{playerHP - nextBlackMageDamage}\n");
+    Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
 
-        if (playerHP <= 0)
-        {
-            Console.WriteLine($"  ### 플레이어 패배... ###\n");
-            break;
-        }
+    if (playerHP <= 0)
+    {
+        Console.WriteLine($"  ### 플레이어 패배... ###\n");
+        break;
     }
 }
