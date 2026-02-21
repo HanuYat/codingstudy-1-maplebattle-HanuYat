@@ -95,20 +95,19 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
             
         }
 
+        Console.WriteLine();
         
-        switch (playerActionNumber)
+        switch (playerActionNumber) 
         {
             // 1-1-1. 일반 공격, 검은마법 체력 감소 후 잔여 체력 출력했습니다.
             case 1:
                 Console.WriteLine($"  - 1. 일반 공격 선택\n");
-                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - playerAttackDamage}\n");
                 nextDamage = playerAttackDamage;
                 break;
 
             // 1-1-2. 스킬 (*MP가 100 미만이라면 사용할 수 없습니다.)
             case 2:
                 Console.WriteLine($"  - 2. 스킬 사용 선택\n");
-                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - playerSkillDamage}\n");
                 nextDamage = playerSkillDamage; playerMP -= 100;
                 break;
 
@@ -137,6 +136,7 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
             enemyHP -= (nextDamage - enemyDefense);
         }
 
+        Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - nextDamage}\n");
         Console.WriteLine($"  [ 검은 마법사 HP: {enemyHP} ]\n");
         isCursing = (enemyHP <= 2500);
 
