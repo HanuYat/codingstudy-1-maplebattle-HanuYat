@@ -1,4 +1,5 @@
 ﻿using System;
+Random rand = new Random();
 
 // === 플레이어 스탯 ===
 float playerHP = 1000;  // 플레이어 HP
@@ -14,6 +15,7 @@ bool isStunned = false; // 기절 상태 플래그
 bool isDefencing = false;   // 방어 상태 플래그
 
 int playerActionNumber = 0;   // 플레이어 행동선택
+float nextDamage = 0;
 
 // === 검은 마법사 스탯 ===
 float enemyHP = 5000;   // 검마 HP
@@ -113,17 +115,31 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
     }
     // 윤지수님 파트 ▲
 
-
-    // 주영찬님 파트 ▼
     {
         // 1. 크리티컬 발동 여부를 판단합니다. (저는 Random 함수를 사용했어요.)
             // 1-2. 크리티컬이 발동했다면 플레이어의 공격 데미지를 1.5배로 만듭니다.
+        if (!isDefencing)
+        {
+            if (rand.Next(0, 100) <= criticalProbality)
+            {
+                Console.WriteLine("  ▶ 크리티컬! ◀\n");
+                nextDamage *= 1.5f;
+            }
 
-        // 2. 플레이어의 공격 데미지와 적의 방어력을 고려해 적의 HP를 감소시킵니다.
+            // 2. 플레이어의 공격 데미지와 적의 방어력을 고려해 적의 HP를 감소시킵니다.
+            enemyHP -= (nextDamage - enemyDefense);
+        }
+
+        Console.WriteLine($"  [ 검은 마법사 HP: {enemyHP} ]\n");
+        isCursing = (enemyHP <= 2500);
 
         // 3. 만약 검마의 체력이 0 이하가 되었다면 플레이어가 승리했음을 알리고, 반복문을 빠져나갑니다.
+        if (enemyHP <= 0)
+        {
+            Console.WriteLine("  ========== 플레이어의 승리! ==========\n");
+            break;
+        }
     }
-    // 주영찬님 파트 ▲
 
     Console.WriteLine($"  >>> 검은 마법사의 턴 <<<\n");
 
