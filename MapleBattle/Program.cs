@@ -83,7 +83,7 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
                 {
                     Console.WriteLine("  - MP 부족으로 스킬 사용 불가\n");
                     Console.Write("  - 다시 입력 : ");
-
+                    continue;
                 }
                 break;
             }
