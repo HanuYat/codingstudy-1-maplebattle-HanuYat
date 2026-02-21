@@ -162,7 +162,7 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
         Console.WriteLine("  - 검마 HP 1000 이하! 데미지가 2배가 됩니다!\n");
         nextBlackMageDamage = enemyAttack * 2;
     }
-    else
+    else if (enemyHP > 1000)
     {
         nextBlackMageDamage = enemyAttack;
     }
@@ -171,9 +171,11 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
     {
         nextBlackMageDamage = enemyAttack / 2;
         Console.WriteLine($"  - 방어 중! 검은마법사의 데미지가 2배 감소!\n");
+        isDefencing = false;    // 방어 효과는 1턴만 지속되므로, 턴이 끝나면 방어 상태를 해제합니다.
     }
+    playerHP -= nextBlackMageDamage;
 
-    Console.WriteLine($"  - 플레이어 HP -{playerHP - nextBlackMageDamage}\n");
+    Console.WriteLine($"  - 플레이어 HP -{nextBlackMageDamage}\n");
     Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
 
     if (playerHP <= 0)
