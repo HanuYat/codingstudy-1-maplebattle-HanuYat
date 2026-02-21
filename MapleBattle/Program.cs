@@ -72,19 +72,25 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
         // 1-2. 플레이어가 기절하지 않았다면, (1.공격/2.스킬/3.방어) 중 유효한 입력이 들어올 때까지 반복하여 입력을 받습니다.
             Console.WriteLine("  - 플레이어 행동 선택 (1~3 숫자 입력)");
             Console.Write("  [ 1. 일반 공격    2. 스킬 사용    3. 방어 ] : ");
-        string input = Console.ReadLine();
-        while (!int.TryParse(input, out playerActionNumber) || playerActionNumber < 1 || playerActionNumber > 3)
+        while (true)
         {
-            if (true)
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out playerActionNumber) && (playerActionNumber == 1 || playerActionNumber == 2 || playerActionNumber ==3))
             {
-                
+                if (playerActionNumber == 2 && playerMP <100)
+                {
+                    Console.WriteLine("  - MP 부족으로 스킬 사용 불가\n");
+                    Console.Write("  - 다시 입력 : ");
+
+                }
+                break;
             }
-            if (!int.TryParse(input, out playerActionNumber) || playerActionNumber < 1 || playerActionNumber > 3)
+            else if (!int.TryParse(input, out playerActionNumber) || playerActionNumber < 1 || playerActionNumber > 3)
             {
-                
+                Console.WriteLine("  - 1~3 사이의 숫자만 입력 가능\n");
+                Console.Write("  - 다시 입력 : ");
             }
-            Console.WriteLine("  - 1~3 사이의 숫자만 입력 가능\n");
-            Console.Write("  - 다시 입력 : ");
+            
         }
 
         
@@ -94,14 +100,14 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
             case 1:
                 enemyHP = enemyHP + enemyDefense - playerAttackDamage;  
                 Console.WriteLine($"  - {playerActionNumber}. 일반 공격 선택\n");
-                Console.WriteLine($"  - 검은 마법사 HP -{enemyDefense-playerAttackDamage}\n");
+                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense-playerAttackDamage}\n");
                 Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
                 break;
             // 1-1-2. 스킬 (*MP가 100 미만이라면 사용할 수 없습니다.)
             case 2:
                 enemyHP = enemyHP + enemyDefense - playerSkillDamage;
                 Console.WriteLine($"  - {playerActionNumber}. 스킬 사용 선택\n");
-                Console.WriteLine($"  - 검은 마법사 HP -{enemyDefense - playerSkillDamage}\n");
+                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - playerSkillDamage}\n");
                 Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
                 playerMP -= 100;
                 break ;
