@@ -136,7 +136,7 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
             enemyHP -= (nextDamage - enemyDefense);
         }
 
-        Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - nextDamage}\n");
+        Console.WriteLine($"  - 검은 마법사 HP -{nextDamage - enemyDefense}\n");
         Console.WriteLine($"  [ 검은 마법사 HP: {enemyHP} ]\n");
         isCursing = (enemyHP <= 2500);
 
@@ -151,43 +151,39 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
     Console.WriteLine($"  >>> 검은 마법사의 턴 <<<\n");
 
     // 이현석님 파트 ▼
-    {
-        // 1-1. 만약 검마의 HP이 1000 이하라면 특수 패턴을 사용해요. (데미지가 2배)
-        // 1-2. 아니라면 기본 데미지로 공격합니다.
-
-        // 2. 플레이어가 방어 중이라면... (데미지 경감 또는 무효화? 효과는 자유롭게 정해도 돼요.)
-
-        // 3. 검마의 공격 데미지와 플레이어의 방어력을 고려해 플레이어의 HP를 감소시킵니다.
-
-        // 4. 만약 플레이어의 체력이 0 이하가 되었다면 플레이어가 패배했음을 알리고, 반복문을 빠져나갑니다.
-    }
-    // 이현석님 파트 ▲
     int nextBlackMageDamage = 0;
 
+    // 1-1. 만약 검마의 HP이 1000 이하라면 특수 패턴을 사용해요. (데미지가 2배)
+    // 1-2. 아니라면 기본 데미지로 공격합니다.
     if (enemyHP <= 1000)
     {
         Console.WriteLine("  - 검마 HP 1000 이하! 데미지가 2배가 됩니다!\n");
         nextBlackMageDamage = enemyAttack * 2;
     }
-    else if (enemyHP > 1000)
+    else
     {
         nextBlackMageDamage = enemyAttack;
     }
 
+    // 2. 플레이어가 방어 중이라면... (데미지 경감 또는 무효화? 효과는 자유롭게 정해도 돼요.)
     if (isDefencing)
     {
         nextBlackMageDamage = enemyAttack / 2;
         Console.WriteLine($"  - 방어 중! 검은마법사의 데미지가 2배 감소!\n");
         isDefencing = false;    // 방어 효과는 1턴만 지속되므로, 턴이 끝나면 방어 상태를 해제합니다.
     }
+
+    // 3. 검마의 공격 데미지와 플레이어의 방어력을 고려해 플레이어의 HP를 감소시킵니다.
     playerHP -= nextBlackMageDamage;
 
     Console.WriteLine($"  - 플레이어 HP -{nextBlackMageDamage}\n");
     Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
 
+    // 4. 만약 플레이어의 체력이 0 이하가 되었다면 플레이어가 패배했음을 알리고, 반복문을 빠져나갑니다.
     if (playerHP <= 0)
     {
         Console.WriteLine($"  ### 플레이어 패배... ###\n");
         break;
     }
+    // 이현석님 파트 ▲
 }
