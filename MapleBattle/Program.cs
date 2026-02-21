@@ -45,9 +45,11 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
             {
                 Console.WriteLine("  - 저주 발생! \n");
                 Console.WriteLine("  - 플레이어 HP -50 / 기절 상태 획득\n");
-                Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
 
                 playerHP -= 50; isStunned = true;
+
+                Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
+
                 curseCount = 3;
             }
 
@@ -98,23 +100,22 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
         {
             // 1-1-1. 일반 공격, 검은마법 체력 감소 후 잔여 체력 출력했습니다.
             case 1:
-                enemyHP = enemyHP + enemyDefense - playerAttackDamage;  
-                Console.WriteLine($"  - {playerActionNumber}. 일반 공격 선택\n");
-                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense-playerAttackDamage}\n");
-                Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
+                Console.WriteLine($"  - 1. 일반 공격 선택\n");
+                Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - playerAttackDamage}\n");
+                nextDamage = playerAttackDamage;
                 break;
+
             // 1-1-2. 스킬 (*MP가 100 미만이라면 사용할 수 없습니다.)
             case 2:
-                enemyHP = enemyHP + enemyDefense - playerSkillDamage;
-                Console.WriteLine($"  - {playerActionNumber}. 스킬 사용 선택\n");
+                Console.WriteLine($"  - 2. 스킬 사용 선택\n");
                 Console.WriteLine($"  - 검은 마법사 HP {enemyDefense - playerSkillDamage}\n");
-                Console.WriteLine($"  [ 검은 마법사 HP : {enemyHP} ]\n");    // 
-                playerMP -= 100;
-                break ;
+                nextDamage = playerSkillDamage; playerMP -= 100;
+                break;
+
             // 1-1-3. 방어
             case 3:
+                Console.WriteLine($"  - 3. 방어 선택\n");
                 isDefencing = true;
-                Console.WriteLine($"  - {playerActionNumber}. 방어 선택\n");
                 break;
         }
         // 각각 올바른 작업을 하도록 작성해 주세요.
