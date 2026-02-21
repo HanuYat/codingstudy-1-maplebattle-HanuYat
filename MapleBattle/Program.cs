@@ -134,9 +134,9 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
 
             // 2. 플레이어의 공격 데미지와 적의 방어력을 고려해 적의 HP를 감소시킵니다.
             enemyHP -= (nextDamage - enemyDefense);
+            Console.WriteLine($"  - 검은 마법사 HP -{nextDamage - enemyDefense}\n");
         }
 
-        Console.WriteLine($"  - 검은 마법사 HP -{nextDamage - enemyDefense}\n");
         Console.WriteLine($"  [ 검은 마법사 HP: {enemyHP} ]\n");
         isCursing = (enemyHP <= 2500);
 
@@ -174,9 +174,9 @@ while (true)    // 승부가 날 때까지 무한 반복합니다.
     }
 
     // 3. 검마의 공격 데미지와 플레이어의 방어력을 고려해 플레이어의 HP를 감소시킵니다.
-    playerHP -= nextBlackMageDamage;
+    playerHP -= (nextBlackMageDamage - playerDefense);
 
-    Console.WriteLine($"  - 플레이어 HP -{nextBlackMageDamage}\n");
+    Console.WriteLine($"  - 플레이어 HP -{nextBlackMageDamage - playerDefense}\n");
     Console.WriteLine($"  [ 플레이어 HP : {playerHP} ]\n");
 
     // 4. 만약 플레이어의 체력이 0 이하가 되었다면 플레이어가 패배했음을 알리고, 반복문을 빠져나갑니다.
